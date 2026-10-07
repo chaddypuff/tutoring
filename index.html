@@ -106,7 +106,6 @@ footer{padding:2rem 0 3rem;color:var(--muted);border-top:2px solid var(--line);m
         <div class="cta">
           <a class="btn" href="#book">Book a free intro call</a>
           <a class="btn alt" href="#rates">See rates</a>
-          <a class="btn alt wa" href="#book">WhatsApp me</a>
         </div>
       </div>
 
@@ -127,7 +126,7 @@ footer{padding:2rem 0 3rem;color:var(--muted);border-top:2px solid var(--line);m
         <div class="card"><h3>Practice problems</h3><p>After each session you get problems on what we covered, so it sticks.</p></div>
         <div class="card"><h3>Exam prep</h3><p>Past-paper style questions and tracing code by hand before the big day.</p></div>
       </div>
-      <p style="margin:2rem 0 .8rem;font-weight:600">Basics I cover in C and Java</p>
+      <p style="margin:2rem 0 .8rem;font-weight:600">Some basics I cover in C and Java</p>
       <ul class="langs"><li>Variables and types</li><li>Loops and conditions</li><li>Functions and methods</li><li>Arrays</li><li>Strings</li><li>Pointers (C)</li><li>Structs (C)</li><li>Memory basics (C)</li><li>Classes and objects (Java)</li></ul>
     </section>
 
@@ -154,10 +153,9 @@ footer{padding:2rem 0 3rem;color:var(--muted);border-top:2px solid var(--line);m
 
     <section id="book">
       <h2>Book your free intro call</h2>
+      <p style="margin:-1rem 0 1.5rem;color:var(--muted)">Fill this in and WhatsApp opens with your message ready to send.</p>
       <form id="f">
         <label>Your name<input name="name" required autocomplete="name"></label>
-        <label>Email<input name="email" type="email" required autocomplete="email"></label>
-        <label>Phone or WhatsApp number<input name="phone" type="tel" required autocomplete="tel" placeholder="e.g. 082 123 4567"></label>
         <label>Language
           <select name="topic"><option>C</option><option>Java</option><option>Both</option></select>
         </label>
@@ -168,14 +166,12 @@ footer{padding:2rem 0 3rem;color:var(--muted);border-top:2px solid var(--line);m
           <select name="size"><option>1</option><option>2</option><option>3 or more</option></select>
         </label>
         <label>What are you struggling with?<textarea name="msg" placeholder="e.g. pointers, arrays, loops"></textarea></label>
-        <button class="btn" type="submit">Send request</button>
+        <button class="btn" type="submit">Send on WhatsApp</button>
       </form>
-      <p style="margin:1.5rem 0 .8rem">Prefer to chat? Message me directly.</p>
-      <a class="btn alt wa" href="#book">WhatsApp me</a>
     </section>
   </main>
 
-  <footer>&copy; 2026 Chad Smith. C and Java tutoring, in person and online.</footer>
+  <footer>&copy; 2026 Chad Smith. C and Java tutoring</footer>
 </div>
 
 <script>
@@ -208,8 +204,10 @@ document.getElementById("run").addEventListener("click",function(){
 document.getElementById("f").addEventListener("submit",function(e){
   e.preventDefault();
   var d=new FormData(e.target);
-  var body="Name: "+d.get("name")+"\nEmail: "+d.get("email")+"\nPhone: "+d.get("phone")+"\nLanguage: "+d.get("topic")+"\nSession: "+d.get("mode")+"\nStudents: "+d.get("size")+"\n\n"+d.get("msg");
-  window.location.href="mailto:chadpetersmith@gmail.com?subject="+encodeURIComponent("Intro call request")+"&body="+encodeURIComponent(body);
+  var msg="Hi Chad, I'm "+d.get("name")+". I'd like to book a free intro call.\n"+
+    "Language: "+d.get("topic")+"\nSession: "+d.get("mode")+"\nStudents: "+d.get("size")+
+    (d.get("msg")?"\nStruggling with: "+d.get("msg"):"");
+  window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank","noopener");
 });
 var WA="27834745490"; // your number, country code first, no + or spaces
 document.querySelectorAll(".wa").forEach(function(a){
